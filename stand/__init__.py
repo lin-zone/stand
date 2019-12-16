@@ -1,0 +1,1 @@
+from stand.db import get_proxy
