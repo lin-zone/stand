@@ -5,7 +5,7 @@ from scrapy import Item, Field
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, Compose
 
-from stand.utils import gen_urls
+from stand.utils import gen_urls, get_domain
 
 
 class ProxyItem(Item):
@@ -43,14 +43,14 @@ class ProxySpider(scrapy.Spider):
                     values = getattr(self, field)
                     getattr(l, 'add_{}'.format(values[0]))(field, values[1])
             item = l.load_item()
-            msg = f"{item['ip']}:{item['port']}"
-            print(msg)
+            print(f"{item['ip']}:{item['port']}")
             yield item
 
     def err_parse(self, failure):
-        msg = f"{failure.value}"
+        domain = get_domain(failure.request.url)
+        msg = f"{domain} {failure.value}"
         print(msg)
-        self.logger.error(msg)
+        self.logger.info(msg)
 
     def all_proxies(self):
         cls = self.__class__

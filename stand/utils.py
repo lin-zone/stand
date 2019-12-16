@@ -1,4 +1,5 @@
 import re
+from urllib.parse import urlparse
 
 from fake_useragent import UserAgent
 
@@ -28,6 +29,14 @@ def is_ip(ip):
     False
     """
     return bool(re.match(_ip_re, ip))
+
+
+def get_domain(url):
+    """获取url的域名
+    >>> domain = get_domain('https://github.com/lin-zone/stand')
+    'github.com'
+    """
+    return urlparse(url).netloc
 
 
 def add_scheme(proxy, https=True):
