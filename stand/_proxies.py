@@ -1,4 +1,4 @@
-from stand.base import ProxySpider
+from stand._base import ProxySpider
 
 
 class _data5u(ProxySpider):

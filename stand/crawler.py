@@ -3,7 +3,7 @@ import os
 
 from scrapy.crawler import CrawlerProcess
 
-from stand.proxies import ProxySpider
+from stand._proxies import ProxySpider
 
 
 ITEM_PIPELINES = {
