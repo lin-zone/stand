@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "stand"
+version = "0.1.4"
+description = "IP代理池"
+authors = ["lin-zone <z_one10@163.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+Scrapy = "1.8.0"
+fake-useragent = "0.1.11"
+peewee = "3.12.0"
+schedule = "0.6.0"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+stand = "stand.main:run"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
