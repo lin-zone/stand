@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-import os
-
 import scrapy
 from scrapy.exceptions import CloseSpider
 from scrapy.crawler import CrawlerProcess
 
 from stand.utils import is_ip, add_scheme, remove_scheme
+from stand.config import VALIDATOR_LOG
 
 
 class ValidatorSpider(scrapy.Spider):
@@ -61,7 +60,7 @@ settings = dict(
     CONCURRENT_REQUESTS=100,
     # LOG_ENABLED=False,
     LOG_LEVEL='INFO',
-    LOG_FILE=os.environ.get('VALIDATOR_LOG', './validator.log'),
+    LOG_FILE=VALIDATOR_LOG,
     RETRY_ENABLED=False,
     DOWNLOAD_TIMEOUT=15,
     ITEM_PIPELINES=ITEM_PIPELINES,

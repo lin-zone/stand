@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "stand"
-version = "0.1.9"
+version = "0.1.10"
 description = "IP代理池"
 authors = ["lin-zone <z_one10@163.com>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/lin-zone/stand"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.6"
 Scrapy = "1.8.0"
 fake-useragent = "0.1.11"
 peewee = "3.12.0"

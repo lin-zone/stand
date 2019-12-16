@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-import os
-
 from scrapy.crawler import CrawlerProcess
 
 from stand._proxies import ProxySpider
+from stand.config import CRAWLER_LOG
 
 
 ITEM_PIPELINES = {
@@ -17,7 +16,7 @@ settings = dict(
     CONCURRENT_REQUESTS=64,
     # LOG_ENABLED=False,
     LOG_LEVEL='INFO',
-    LOG_FILE=os.environ.get('CRAWLER_LOG', './crawler.log'),
+    LOG_FILE=CRAWLER_LOG,
     RETRY_ENABLED=False,
     DOWNLOAD_TIMEOUT=30,
     ITEM_PIPELINES=ITEM_PIPELINES,

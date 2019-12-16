@@ -1,8 +1,9 @@
-import os
 from random import shuffle
 from threading import Lock
 
 from peewee import *
+
+from stand.config import STAND_DB
 
 
 class Cache(list):
@@ -46,8 +47,7 @@ class SqliteDB:
     model = ProxyPool
 
     def __init__(self):
-        database = os.environ.get('STAND_DB', './stand.db')
-        self._db = self.model._meta.database = SqliteDatabase(database, check_same_thread=False)
+        self._db = self.model._meta.database = SqliteDatabase(STAND_DB, check_same_thread=False)
         self.model.create_table()
     
     def add(self, proxy):
