@@ -6,6 +6,7 @@ from stand.db import SqliteDB
 
 
 _proxy_re = r'^\d+.\d+.\d+.\d+:\d+$'
+_ip_re = r'^\d+.\d+.\d+.\d+$'
 _url_range_re = r'{(\d+),\s*(\d+)}'
 
 
@@ -17,6 +18,26 @@ def is_proxy(proxy):
     False
     """
     return bool(re.match(_proxy_re, proxy))
+
+
+def is_ip(ip):
+    """判断是否有效IP
+    >>> is_ip('127.0.0.1')
+    True
+    >>> is_ip('a12.df.qe.3')
+    False
+    """
+    return bool(re.match(_ip_re, ip))
+
+
+def add_scheme(proxy, https=True):
+    scheme = 'https' if https else 'http'
+    return f'{scheme}://{proxy}'
+
+
+def remove_scheme(proxy, https=True):
+    scheme = 'https' if https else 'http'
+    return proxy.strip(f'{scheme}://')
 
 
 def gen_urls(url):
@@ -53,6 +74,25 @@ class SqliteCrawlerPipeline(object):
         proxy = f"{item['ip']}:{item['port']}"
         if is_proxy(proxy):
             self._db.add(proxy)
+        return item
+
+    def close_spider(self, spider):
+        self._db.clean()
+        self._db.close()
+
+
+class SqliteValidatorPipeline(object):
+
+    def open_spider(self, spider):
+        self._db = SqliteDB()
+        spider.proxies = self._db.all()
+
+    def process_item(self, item, spider):
+        status, proxy = item['status'], item['proxy']
+        if status:
+            self._db.max_score(proxy)
+        else:
+            self._db.decrease_score(proxy)
         return item
 
     def close_spider(self, spider):

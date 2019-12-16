@@ -59,6 +59,13 @@ class SqliteDB:
     def all(self):
         return self._get_proxies(self.MIN_SCORE + 1)
 
+    def len(self, score=None):
+        if score is None:
+            score = self.MAX_SCORE
+        else:
+            score = int(score)
+        return len(self._get_proxies(score))
+
     def max_score(self, proxy):
         self.model.update(score=self.MAX_SCORE).where(self.model.proxy == proxy).execute()
 
