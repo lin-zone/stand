@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stand"
-version = "0.1.5"
+version = "0.1.9"
 description = "IP代理池"
 authors = ["lin-zone <z_one10@163.com>"]
 license = "MIT"
