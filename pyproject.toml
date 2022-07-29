@@ -9,7 +9,7 @@ homepage = "https://github.com/lin-zone/stand"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-Scrapy = "1.8.0"
+Scrapy = "2.6.2"
 fake-useragent = "0.1.11"
 peewee = "3.12.0"
 schedule = "0.6.0"
